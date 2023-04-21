@@ -1,7 +1,7 @@
 export const QuizData = [
     {
         question: "What is the capital of India?",
-        options:[ "Delhi","Agra","Bombay","Madras"],
+        options:["Delhi","Agra","Bombay","Madras"],
         answer: 1
     },
     {

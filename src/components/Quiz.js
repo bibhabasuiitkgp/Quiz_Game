@@ -6,9 +6,15 @@ function Quiz() {
     const [score,setScore] = useState(0);
     const [clickedOption,setClickedOption]=useState(0);
     const [showResult,setShowResult]=useState(false);
+    const[rightAnswer, setRightAnswer]= useState(null);
+    const[optionchose, setOptionChose] = useState(false);
+    const[disabled, setDisabled] = useState(false)
     
     const changeQuestion = ()=>{
         updateScore();
+        setOptionChose(false)
+        setRightAnswer(false)
+        setDisabled(false)
         if(currentQuestion< QuizData.length-1){
             setCurrentQuestion(currentQuestion+1);
             setClickedOption(0);
@@ -16,9 +22,14 @@ function Quiz() {
             setShowResult(true)
         }
     }
+    const answer= QuizData[currentQuestion].answer;
     const updateScore=()=>{
         if(clickedOption===QuizData[currentQuestion].answer){
             setScore(score+1);
+            setRightAnswer(true)
+        }
+        else{
+            setRightAnswer(true)
         }
     }
     const resetAll=()=>{
@@ -26,6 +37,14 @@ function Quiz() {
         setCurrentQuestion(0);
         setClickedOption(0);
         setScore(0);
+    }
+    const selectOption=(i)=>{
+     if(!disabled){
+        setClickedOption(i+1)
+        updateScore()
+        setOptionChose(true)
+        setDisabled(true)
+     }
     }
   return (
     <div>
@@ -41,14 +60,14 @@ function Quiz() {
             </div>
             <div className="option-container">
                 {QuizData[currentQuestion].options.map((option,i)=>{
+                    
                     return(
                         <button 
+                        onClick={()=>selectOption(i)}
                         // className="option-btn"
-                        className={`option-btn ${
-                            clickedOption == i+1?"checked":null
-                        }`}
+                        className={optionchose? (rightAnswer&&(i+1)===answer? "option-btn rightanswer": (clickedOption===i+1)?"option-btn wronganswer":"option-btn"): "option-btn"}
                         key={i}
-                        onClick={()=>setClickedOption(i+1)}
+                        
                         >
                         {option}
                         </button>
