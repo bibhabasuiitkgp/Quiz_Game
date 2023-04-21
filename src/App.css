@@ -74,16 +74,22 @@ body{
   min-height: 30px;
   background-color: white;
 }
+.rightanswer{
+  background-color: green;
+}
+.wronganswer{
+  background-color: red;
+}
 
 .checked{
   background-color: rgb(179, 83, 179);
   color:white;
   box-shadow: 3px 3px 4px 1px rgb(78, 69, 78);
 }
-.option-btn:hover{
+/* .option-btn:hover{
   background-color: rgb(212, 118, 212);
   color:white;
-}
+} */
 #next-button{
   padding:10px;
   border:none;
